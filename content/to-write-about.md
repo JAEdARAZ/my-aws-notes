@@ -1,0 +1,6 @@
+- How do DynamoDB stream shards work?
+	- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html#Streams.Processing
+	- https://aws.amazon.com/es/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/
+- Advanced DynamoDB stream filtering
+- NPM build process of lambdas
+- TSConfig
