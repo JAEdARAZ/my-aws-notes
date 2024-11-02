@@ -19,9 +19,9 @@ The default behaviour could be dangerous, as `retryAttempts`'s default value is 
 That's why it's critical to configure reporting batch item failures and even bisecting the batch.
 
 ### Batch item failure
-Set `reportBatchItemFailures` as true in the `DynamoEventSource` configuration. The identifiers of those failed records should be returned. If unfamiliar with this, give a read to the following [[#^ca7071|article]].
+Set `reportBatchItemFailures` as true in the `DynamoEventSource` configuration. The identifiers of those failed records should be returned. If unfamiliar with this, give a read to the following [article](https://aws.amazon.com/es/blogs/compute/optimizing-batch-processing-with-custom-checkpoints-in-aws-lambda/).
 
-For this to succeed, the ids of the failed records need to be returned in the lambda response. This can be self-managed or delegated to [[DynamoDB Stream - Lambda error handling#^b921d8|Lambda Powertools Batch]].
+For this to succeed, the ids of the failed records need to be returned in the lambda response. This can be self-managed or delegated to [Lambda Powertools Batch](https://docs.powertools.aws.dev/lambda/typescript/latest/utilities/batch/).
 
 **Example**
 Three records, the second fails. The identifier of that record will be returned. The stream will identify the lowest sequence number out of those item identifiers received (only one in this case) and retry from there, meaning that the following batch would contain the records 2 and 3.  **Retries are counted for the same batch being re-sent.**
@@ -63,12 +63,12 @@ testFunction.addEventSource(new DynamoEventSource(table, {
 }));
 ```
 
-Extracted from [[#^ca7071|AWS Compute Blog by James Beswick]]:
+Extracted from [AWS Compute Blog by James Beswick](https://aws.amazon.com/es/blogs/compute/optimizing-batch-processing-with-custom-checkpoints-in-aws-lambda/):
 
 ![[beswick-bisect-batch-on-error.png]]
 
 ### reportBatchItemFailures + bisectBatchOnError
-But how would it behave if combining both settings? Quote from [[#^fa2dfc|bisect on batch error - AWS docs]]:
+But how would it behave if combining both settings? Quote from [bisect on batch error - AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-batchfailurereporting):
 > If your invocation fails and `BisectBatchOnFunctionError` is turned on, the batch is bisected regardless of your `ReportBatchItemFailures` setting.
 > 
 > When a partial batch success response is received and both `BisectBatchOnFunctionError` and `ReportBatchItemFailures` are turned on, the batch is bisected at the returned sequence number and Lambda retries only the remaining records.
@@ -89,14 +89,14 @@ Note that if only receiving one failed record in the DLQ message the differences
 - `startSequenceNumber` and `endSequenceNumber` hold the same value
 
 This message contains no data that could give a clue of what went wrong. To get some information, it's necessary to obtain it from the stream. If this is not done before the record expires (in the stream), then the data will be lost - 24h is the default configuration for a DynamoDB stream.
-This could be achieved by hydrating the event data, [[#^a04203|as explained by Yan Cui]].
+This could be achieved by hydrating the event data, [as explained by Yan Cui](https://theburningmonk.com/2023/12/the-one-mistake-everyone-makes-when-using-kinesis-with-lambda/).
 
 ### Retry attempts
-[[#^b6a064|Extracted from the documentation]]: default configuration is to retry until the event expires (`-1`) and if given a value, it has to be between 0 and 10k.
+[Extracted from the documentation](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-errors): default configuration is to retry until the event expires (`-1`) and if given a value, it has to be between 0 and 10k.
 
 Unexpected behaviour could happen if `bisectBatchOnError` is configured, since it would split the failed batch and retry, even if setting `retryAttempts`  to zero. An example of this can be found [[#^c9c303|here]].
 
-[[#^b6a064|Remember that retries are only counted when the same batch is sent again.]]
+[Remember that retries are only counted when the same batch is sent again.](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-errors)
 > Retrying with smaller batches isolates bad records and works around timeout issues. Splitting a batch does not count towards the retry quota.
 
 --- 
@@ -105,13 +105,13 @@ This could be handled differently if trying to minimize the number of times a su
 
 ### References
 
-- [Report batch item failures - AWS Compute Blog - James Beswick](https://aws.amazon.com/es/blogs/compute/optimizing-batch-processing-with-custom-checkpoints-in-aws-lambda/) ^ca7071
+- [Report batch item failures - AWS Compute Blog - James Beswick](https://aws.amazon.com/es/blogs/compute/optimizing-batch-processing-with-custom-checkpoints-in-aws-lambda/)
 - [Event source mapping batching behaviour](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-batching)
-- [Lambda powertools batch item failures](https://docs.powertools.aws.dev/lambda/typescript/latest/utilities/batch/) ^b921d8
+- [Lambda powertools batch item failures](https://docs.powertools.aws.dev/lambda/typescript/latest/utilities/batch/)
 - [Serverless Guru lambda integration retries table](https://www.serverlessguru.com/blog/lambda-retry-mechanisms)
-- [Bisect on batch error - AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-batchfailurereporting) ^fa2dfc
+- [Bisect on batch error - AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-batchfailurereporting)
 - [Stream partial failures, complete explanation - Marcin Sodkiewicz](https://sodkiewiczm.medium.com/streams-partial-failures-c72ba1ae4fa6)
-- [Retry attempts](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-errors) ^b6a064
+- [Retry attempts](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-errors)
 - [Dynamo Streams records retention period](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html#Streams.DataRetention)
-- [Hydrate failed record messages onFailure - Yan Cui](https://theburningmonk.com/2023/12/the-one-mistake-everyone-makes-when-using-kinesis-with-lambda/) ^a04203
-- [How do I troubleshoot DynamoDB Streams in my Lambda functions?](https://repost.aws/knowledge-center/lambda-functions-fix-dynamodb-streams) ^c9c303
+- [Hydrate failed record messages onFailure - Yan Cui](https://theburningmonk.com/2023/12/the-one-mistake-everyone-makes-when-using-kinesis-with-lambda/)
+- [How do I troubleshoot DynamoDB Streams in my Lambda functions?](https://repost.aws/knowledge-center/lambda-functions-fix-dynamodb-streams)

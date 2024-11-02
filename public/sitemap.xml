@@ -1,13 +1,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https://https:/my-aws-notes.pages.dev/DynamoDB-Stream---Lambda-error-handling</loc>
+    <loc>https://my-aws-notes.pages.dev/DynamoDB-Stream---Lambda-error-handling</loc>
     <lastmod>2024-03-03T13:16:49.904Z</lastmod>
   </url><url>
-    <loc>https://https:/my-aws-notes.pages.dev/SQS---Lambda-error-handling</loc>
-    <lastmod>2024-03-03T13:19:56.414Z</lastmod>
-  </url><url>
-    <loc>https://https:/my-aws-notes.pages.dev/</loc>
+    <loc>https://my-aws-notes.pages.dev/Index</loc>
     <lastmod>2024-11-01T10:03:16.346Z</lastmod>
   </url><url>
-    <loc>https://https:/my-aws-notes.pages.dev/to-write-about</loc>
+    <loc>https://my-aws-notes.pages.dev/SQS---Lambda-error-handling</loc>
+    <lastmod>2024-03-03T13:19:56.414Z</lastmod>
+  </url><url>
+    <loc>https://my-aws-notes.pages.dev/to-write-about</loc>
     <lastmod>2024-02-28T21:34:47.651Z</lastmod>
   </url></urlset>

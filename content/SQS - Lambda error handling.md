@@ -1,6 +1,5 @@
 ---
 title: SQS - Lambda error hanlding
-pageTitleSuffix: sqs-lambda-error-handling
 ---
 
 
@@ -39,7 +38,7 @@ testFunction.addEventSource(new SqsEventSource(invocationQueue, {
   maxBatchingWindow: Duration.seconds(5),// careful with SQS visibilityTimeout
 }));
 ```
-For this to succeed, the ids of the failed records need to be returned in the lambda response. This can be self-managed or delegated to [[#^507c6f|Lambda Powertools Batch]]. For a batch of five messages where two failed, the response should be something like this:
+For this to succeed, the ids of the failed records need to be returned in the lambda response. This can be self-managed or delegated to [Lambda Powertools Batch](https://docs.powertools.aws.dev/lambda/typescript/latest/utilities/batch/). For a batch of five messages where two failed, the response should be something like this:
 ```json
 {
   "batchItemFailures": [
@@ -66,6 +65,5 @@ All the examples are based on processing all records in a batch at least once, e
 If using Lambda Powertools Batch, the processor `BatchProcessorSync` could be used to process the records sequentially. If self-managed, then loop through each record instead of using `Promise.all()`.
 ### Resources
 - [Detailed explanation of SQS Lambda Batch Item Failure behaviour](https://sodkiewiczm.medium.com/sqs-partial-failures-4df63470506d)
-- [Lambda powertools batch item failures](https://docs.powertools.aws.dev/lambda/typescript/latest/utilities/batch/) ^507c6f
+- [Lambda powertools batch item failures](https://docs.powertools.aws.dev/lambda/typescript/latest/utilities/batch/)
 - [Serverless Guru lambda integration retries table](https://www.serverlessguru.com/blog/lambda-retry-mechanisms)
-

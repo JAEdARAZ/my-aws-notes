@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
     <channel>
-      <title>🪴 Quartz 4.0</title>
-      <link>https://https://my-aws-notes.pages.dev/</link>
-      <description>Last 10 notes on 🪴 Quartz 4.0</description>
+      <title>My AWS notes 🌩️</title>
+      <link>https://my-aws-notes.pages.dev</link>
+      <description>Last 10 notes on My AWS notes 🌩️</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>index</title>
-    <link>https://https:/my-aws-notes.pages.dev/</link>
-    <guid>https://https:/my-aws-notes.pages.dev/</guid>
+    <title>Index</title>
+    <link>https://my-aws-notes.pages.dev/Index</link>
+    <guid>https://my-aws-notes.pages.dev/Index</guid>
     <description>SQS - Lambda error handling DynamoDB Stream - Lambda error handling.</description>
     <pubDate>Fri, 01 Nov 2024 10:03:16 GMT</pubDate>
   </item><item>
     <title>SQS - Lambda error hanlding</title>
-    <link>https://https:/my-aws-notes.pages.dev/SQS---Lambda-error-handling</link>
-    <guid>https://https:/my-aws-notes.pages.dev/SQS---Lambda-error-handling</guid>
+    <link>https://my-aws-notes.pages.dev/SQS---Lambda-error-handling</link>
+    <guid>https://my-aws-notes.pages.dev/SQS---Lambda-error-handling</guid>
     <description>Retries Lambda retries don’t have any impact. If an error is thrown, the batch will be sent back to the queue. Then, depending on the visibility timeout configured in the queue, the messages of the batch will be reprocessed.</description>
     <pubDate>Sun, 03 Mar 2024 13:19:56 GMT</pubDate>
   </item><item>
     <title>Dynamo DB Stream - Lambda error handling</title>
-    <link>https://https:/my-aws-notes.pages.dev/DynamoDB-Stream---Lambda-error-handling</link>
-    <guid>https://https:/my-aws-notes.pages.dev/DynamoDB-Stream---Lambda-error-handling</guid>
+    <link>https://my-aws-notes.pages.dev/DynamoDB-Stream---Lambda-error-handling</link>
+    <guid>https://my-aws-notes.pages.dev/DynamoDB-Stream---Lambda-error-handling</guid>
     <description>Event source configuration For DynamoDB (as well as SQS) the default batching window is 0 seconds For Kinesis, DynamoDB, and Amazon SQS event sources: The default batching window ...</description>
     <pubDate>Sun, 03 Mar 2024 13:16:49 GMT</pubDate>
   </item><item>
     <title>to-write-about</title>
-    <link>https://https:/my-aws-notes.pages.dev/to-write-about</link>
-    <guid>https://https:/my-aws-notes.pages.dev/to-write-about</guid>
+    <link>https://my-aws-notes.pages.dev/to-write-about</link>
+    <guid>https://my-aws-notes.pages.dev/to-write-about</guid>
     <description>...</description>
     <pubDate>Wed, 28 Feb 2024 21:34:47 GMT</pubDate>
   </item>
